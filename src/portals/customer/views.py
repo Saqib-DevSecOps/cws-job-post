@@ -39,7 +39,7 @@ class CandidateListView(ListView):
 class CandidateCreateView(CreateView):
     template_name = 'customer/candidate_form.html'
     model = Candidate
-    fields = ['bachelor_degree', 'experience', 'about', 'previous_company', 'cv']
+    fields = ['degree', 'experience', 'about', 'previous_company', 'cv']
     success_url = reverse_lazy('customer:application-list')
 
     def dispatch(self, request, *args, **kwargs):
@@ -60,7 +60,7 @@ class CandidateCreateView(CreateView):
 class CandidateUpdateView(UpdateView):
     template_name = 'customer/candidate_form.html'
     model = Candidate
-    fields = ['bachelor_degree', 'experience', 'about', 'previous_company', 'cv']
+    fields = ['degree', 'experience', 'about', 'previous_company', 'cv']
     success_url = reverse_lazy('customer:application-list')
 
     def form_valid(self, form):

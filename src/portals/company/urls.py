@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     JobUpdateView, JobListView, JobCreateView, JobDeleteView, CandidateListView, JobLikeListView, JobStatusUpdate,
-    DashboardView, CompanyUpdateView, CandidateDetailView, CandidateStatusUpdate
+    DashboardView, CompanyUpdateView, CandidateDetailView, CandidateStatusUpdate, CandidateStatusDelete
 )
 
 app_name = 'company'
@@ -16,5 +16,8 @@ urlpatterns = [
     path('job/<int:pk>/likes/', JobLikeListView.as_view(), name='job-likes-list'),
     path('job/<int:pk>/candidates/', CandidateListView.as_view(), name='candidate-list'),
     path('job/<int:job>/candidate/<int:pk>/', CandidateDetailView.as_view(), name='candidate-detail'),
-    path('job/<int:job>/candidate/<int:pk>/action/<str:action>/', CandidateStatusUpdate.as_view(), name='candidate-status-update'),
+    path('job/<int:job>/candidate/<int:pk>/action/<str:action>/', CandidateStatusUpdate.as_view(), name='candidate'
+                                                                                                        '-status-update'),
+    path('job/<int:job>/candidate/<int:pk>/delete', CandidateStatusDelete.as_view(), name='candidate-status-delete'),
+
 ]

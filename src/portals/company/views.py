@@ -1,10 +1,14 @@
 from django.contrib import messages
+from django.core.mail.backends.smtp import EmailBackend
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import UpdateView, CreateView, DeleteView, ListView, TemplateView, DetailView
+from django.core.mail import send_mail
 
+from core import settings
 from src.accounts.decorators import company_required
 from src.portals.company.bll import get_user_company_bll
 from .models import Job, Company, Candidate
@@ -136,6 +140,27 @@ class CandidateStatusUpdate(View):
         messages.success(request, 'Candidate Status changed successfully.')
 
         return redirect("company:candidate-detail", job, pk)
+
+
+@method_decorator(company_required, name='dispatch')
+class CandidateStatusDelete(View):
+    def post(self, request, job, pk, *args, **kwargs):
+        job_ = get_object_or_404(Job.objects.filter(company__user=self.request.user), pk=job)
+        candidate_ = get_object_or_404(Candidate.objects.filter(job=job_), pk=pk)
+        message = self.request.POST.get('message')
+        if message is not None:
+            candidate_.status = 'rej'
+            candidate_.save()
+            subject = 'Your Application Form is rejected'
+            message = message
+            from_email = settings.EMAIL_HOST_USER
+            to = candidate_.user.email
+            send_mail(subject,message,from_email,to,fail_silently=False)
+            messages.success(request, 'Candidate Application is Rejected')
+            return redirect('company:job-list')
+        else:
+            messages.error(request, "Give Reason For your Rejection")
+            return redirect("company:candidate-detail", job, pk)
 
 
 @method_decorator(company_required, name='dispatch')

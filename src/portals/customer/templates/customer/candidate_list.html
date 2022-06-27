@@ -56,7 +56,10 @@
                                     {% elif object.status == 'pen' %}
                                         <b class="text-warning"><i
                                                 class="fa fa-clock"></i> {{ object.get_status_display }}</b>
-                                    {% else %}
+                                    {% elif object.status == 'rej' %}
+                                    <b class="text-danger"><i
+                                            class="fa fa-cancel"></i> {{ object.get_status_display }}</b>
+                                    {% elif object.status == 'acc' %}
                                         <b class="text-success"><i
                                                 class="fa fa-check-circle"></i> {{ object.get_status_display }}</b>
                                     {% endif %}

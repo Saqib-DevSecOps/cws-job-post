@@ -16,7 +16,6 @@ class HomeView(ListView):
 
         # IF AUTHENTICATED USER
         if self.request.user.is_authenticated:
-
             # GETTING LIKES AND ENROLLED JOBS
             jobs_candidate_user = Job.objects.filter(candidate__user=self.request.user).values('pk')
             jobs_liked_by_user = Job.objects.filter(likes=self.request.user).values('pk')
@@ -40,3 +39,8 @@ class HomeView(ListView):
 
 class ProjectView(DetailView):
     template_name = 'website/project_detail.html'
+    model = Job
+    context_object_name = 'object'
+
+    def get_queryset(self):
+        return Job.objects.select_related('company').all()

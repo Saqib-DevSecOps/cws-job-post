@@ -122,13 +122,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 """ EMAIL AND ALL AUTH ------------------------------------------------------------------------------------------- """
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'email@gmail.com'
-EMAIL_HOST_PASSWORD = '0000000000000000000'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'email@gmail.com'
+# EMAIL_HOST_PASSWORD = '0000000000000000000'
+# EMAIL_PORT = 587
+# DEFAULT_FROM_EMAIL = 'CORE-Team <noreply@core.com>'
+
+# Email configuration for Gmail
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'CORE-Team <noreply@core.com>'
+EMAIL_HOST_USER = "saqibahmad778866@gmail.com"
+EMAIL_HOST_PASSWORD = "tpmdoiafedglayca"
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {'SCOPE': ['profile', 'email', ],
@@ -141,3 +151,4 @@ ACCOUNT_USERNAME_REQUIRED = False
 OLD_PASSWORD_FIELD_ENABLED = True
 LOGOUT_ON_PASSWORD_CHANGE = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+

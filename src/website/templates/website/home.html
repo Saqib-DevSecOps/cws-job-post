@@ -36,7 +36,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <p class="card-title mb-0">{{ object.title }}</p>
-                                            <p class="mb-0"><a href="#">{{ object.company.name }}</a></p>
+                                            <p class="mb-0"><a href="{% url 'website:project-detail' object.id %}">{{ object.company.name }}</a></p>
                                         </div>
                                         <div class="col text-right">
                                             <p class="mb-0 card-title">{{ object.category.name }}</p>

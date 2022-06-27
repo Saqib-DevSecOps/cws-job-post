@@ -13,6 +13,7 @@ class Company(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, default="Name")
     tag_line = models.CharField(max_length=255, null=True, blank=True)
+    reg_no = models.CharField(max_length=50,null=True,blank=True)
     description = models.TextField(null=True, blank=True)
     business_type = models.CharField(max_length=255, choices=TYPE_CHOICE, default='per')
 
@@ -72,6 +73,7 @@ class Candidate(models.Model):
         ('acc', 'Accepted'),
         ('pen', 'Pending'),
         ('app', 'Applied'),
+        ('rej', 'Rejected'),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     bachelor_degree = models.CharField(

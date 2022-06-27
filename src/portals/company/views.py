@@ -33,8 +33,10 @@ class CompanyUpdateView(UpdateView):
     model = Company
     fields = [
         'name', 'tag_line', 'description',
-        'business_type', 'contact_number',
-        'contact_email', 'contact_address'
+        'business_type','company_registration_no',
+         'contact_number','company_start_date',
+        'contact_email', 'company_address'
+
     ]
 
     def get_success_url(self):

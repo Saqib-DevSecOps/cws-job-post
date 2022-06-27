@@ -17,9 +17,12 @@ class Company(models.Model):
     description = models.TextField(null=True, blank=True)
     business_type = models.CharField(max_length=255, choices=TYPE_CHOICE, default='per')
 
+    company_registration_no=models.CharField(max_length=255, null=True, blank=True)
+    company_start_date = models.DateTimeField(verbose_name=('Date started'),null=True, blank=True)
+
     contact_number = models.CharField(max_length=20, null=True, blank=True)
     contact_email = models.CharField(max_length=255, null=True, blank=True)
-    contact_address = models.TextField(null=True, blank=True)
+    company_address = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Companies"
@@ -75,9 +78,18 @@ class Candidate(models.Model):
         ('app', 'Applied'),
         ('rej', 'Rejected'),
     )
+    DEGREE_CHOICES=(
+        ('ssc', 'Matric'),
+        ('hssc', 'F.sc'),
+        ('bs', 'Bachelors'),
+        ('ms', 'Master'),
+        ('phd', 'Doctorate'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    bachelor_degree = models.CharField(
-        max_length=255,
+    degree = models.CharField(
+        max_length=15,
+        choices=DEGREE_CHOICES,
+        default='ssc',
         help_text="Name of Field in which you have passed bachelors - Leave blank if you don't have bachelors degree"
     )
     experience = models.PositiveIntegerField(default=0, help_text="Years of working experience")

@@ -43,6 +43,7 @@ class CandidateCreateView(CreateView):
     success_url = reverse_lazy('customer:application-list')
 
     def dispatch(self, request, *args, **kwargs):
+        print(request.POST.get('cv'))
         job = get_object_or_404(Job.objects.all(), pk=kwargs['pk'])
         if Candidate.objects.filter(user=request.user, job=job):
             messages.error(request, 'You have already applied to this job.')
@@ -53,6 +54,7 @@ class CandidateCreateView(CreateView):
         job = get_object_or_404(Job.objects.all(), pk=self.kwargs['pk'])
         form.instance.user = self.request.user
         form.instance.job = job
+        form.save()
         return super(CandidateCreateView, self).form_valid(form)
 
 
@@ -62,6 +64,10 @@ class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = ['degree', 'experience', 'about', 'previous_company', 'cv']
     success_url = reverse_lazy('customer:application-list')
+
+    def dispatch(self, request, *args, **kwargs):
+        print(request.POST)
+        return super(CandidateUpdateView, self).dispatch(request)
 
     def form_valid(self, form):
         return super(CandidateUpdateView, self).form_valid(form)

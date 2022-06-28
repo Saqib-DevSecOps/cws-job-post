@@ -32,7 +32,6 @@ class CompanyUpdateView(UpdateView):
         'business_type','company_registration_no',
          'contact_number','company_start_date',
         'contact_email', 'company_address'
-
     ]
 
     def get_success_url(self):
@@ -53,7 +52,7 @@ class JobListView(ListView):
 @method_decorator(company_required, name='dispatch')
 class JobCreateView(CreateView):
     model = Job
-    fields = ['title', 'category', 'description']
+    fields = ['title', 'category', 'vacancy' ,'description']
     success_url = reverse_lazy('company:job-list')
 
     def form_valid(self, form):
@@ -64,7 +63,7 @@ class JobCreateView(CreateView):
 @method_decorator(company_required, name='dispatch')
 class JobUpdateView(UpdateView):
     model = Job
-    fields = ['title', 'category', 'description', 'status']
+    fields = ['title', 'category', 'vacancy','description', 'status']
     success_url = reverse_lazy('company:job-list')
 
     def get_object(self, queryset=None):

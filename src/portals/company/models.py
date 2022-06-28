@@ -50,6 +50,7 @@ class Job(models.Model):
 
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    vacancy = models.IntegerField(default=0)
     description = models.TextField()
     detailed_description = RichTextField(null=True, blank=True)
     company = models.ForeignKey('Company', related_name='job_provider', on_delete=models.CASCADE, blank=True)
@@ -98,7 +99,7 @@ class Candidate(models.Model):
     previous_company = models.CharField(max_length=255, null=True, blank=True, help_text="Leave blank if not")
     job = models.ForeignKey(Job, on_delete=models.CASCADE, blank=True)
     status = models.CharField(max_length=3, choices=STATUS_CHOICE, default='app')
-    cv = models.FileField(upload_to='company/candidates/files/', blank=True, null=True)
+    cv = models.FileField(upload_to='company/candidates/files/', null=False, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

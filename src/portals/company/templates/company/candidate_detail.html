@@ -87,7 +87,13 @@
                 <p class="mb-0 card-title-desc">Candidate personal, professional and educational information</p>
             </div>
             <div class="card-body">
-                {% lorem 1 p %}
+    <ul class="list-group p-4">
+        <h6><li > Candidate Degree : {{object.degree}}</li></h6>
+        <h6><li > Candidate Degree : {{object.experience}}</li></h6>
+        <h6><li > Candidate Degree : {{object.previous_company}}</li></h6><hr>
+        <h6>{{object.about}}</h6>
+        <a href="{{object.cv.url}}">Download Cv</a>
+    </ul>
             </div>
         </div>
 
@@ -123,7 +129,7 @@
                 {% if object.status != 'rej' %}
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                        data-whatever="@getbootstrap">Delete
+                        data-whatever="@getbootstrap">Reject
                 </button>
                 {% endif %}
 

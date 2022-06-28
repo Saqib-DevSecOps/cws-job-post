@@ -51,7 +51,7 @@ class JobListView(ListView):
     model = Job
 
     def get_queryset(self):
-        return Job.objects.filter(company__user=self.request.user)
+        return Job.objects.filter(company__user=self.request.user).exclude()
 
 
 @method_decorator(company_required, name='dispatch')
@@ -96,7 +96,7 @@ class JobDeleteView(DeleteView):
 class CandidateListView(ListView):
 
     def get_queryset(self):
-        return Candidate.objects.filter(job=self.kwargs['pk'])
+        return Candidate.objects.filter(job=self.kwargs['pk']).exclude(status='rej')
 
 
 @method_decorator(company_required, name='dispatch')
@@ -153,11 +153,11 @@ class CandidateStatusDelete(View):
         if message is not None:
             candidate_.status = 'rej'
             candidate_.save()
-            subject = 'Your Application Form is rejected'
-            message = message
-            from_email = settings.EMAIL_HOST_USER
-            to = candidate_.user.email
-            send_mail(subject,message,from_email,to,fail_silently=False)
+            # subject = 'Your Application Form is rejected'
+            # message = message
+            # from_email = settings.EMAIL_HOST_USER
+            # to = candidate_.user.email
+            # send_mail(subject,message,from_email,to,fail_silently=False)
             messages.success(request, 'Candidate Application is Rejected')
             return redirect('company:job-list')
         else:
@@ -178,3 +178,4 @@ class JobStatusUpdate(View):
         job.save()
         messages.success(request, 'Job Status changed successfully.')
         return redirect("company:job-list")
+

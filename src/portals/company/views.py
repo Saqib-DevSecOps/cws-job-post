@@ -29,8 +29,8 @@ class CompanyUpdateView(UpdateView):
     model = Company
     fields = [
         'name', 'tag_line', 'description',
-        'business_type','company_registration_no',
-         'contact_number','company_start_date',
+        'business_type', 'company_registration_no',
+        'contact_number', 'company_start_date',
         'contact_email', 'company_address'
     ]
 
@@ -52,7 +52,7 @@ class JobListView(ListView):
 @method_decorator(company_required, name='dispatch')
 class JobCreateView(CreateView):
     model = Job
-    fields = ['title', 'category', 'vacancy' ,'description']
+    fields = ['title', 'category', 'vacancy', 'description']
     success_url = reverse_lazy('company:job-list')
 
     def form_valid(self, form):
@@ -63,7 +63,7 @@ class JobCreateView(CreateView):
 @method_decorator(company_required, name='dispatch')
 class JobUpdateView(UpdateView):
     model = Job
-    fields = ['title', 'category', 'vacancy','description', 'status']
+    fields = ['title', 'category', 'vacancy', 'description', 'status']
     success_url = reverse_lazy('company:job-list')
 
     def get_object(self, queryset=None):
@@ -152,3 +152,14 @@ class JobStatusUpdate(View):
         job.save()
         messages.success(request, 'Job Status changed successfully.')
         return redirect("company:job-list")
+
+
+def download_file(request,job,pk):
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filename = 'cv.txt'
+    filepath = BASE_DIR + '/filedownload/Files/' + filename
+    path = open(filepath, 'r')
+    mime_type, _ = mimetypes.guess_type(filepath)
+    response = HttpResponse(path, content_type=mime_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response

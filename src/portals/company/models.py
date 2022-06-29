@@ -50,6 +50,7 @@ class Job(models.Model):
 
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    vacancy = models.IntegerField(default=0)
     description = models.TextField()
     detailed_description = RichTextField(null=True, blank=True)
     company = models.ForeignKey('Company', related_name='job_provider', on_delete=models.CASCADE, blank=True)

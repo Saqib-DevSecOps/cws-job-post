@@ -63,7 +63,7 @@
                                 {% elif object.status == 'pen' %}
                                 <i class="fa fa-exclamation-circle text-warning"></i>
                                 {% elif object.status == 'rej' %}
-                                <i class="fa fa-cancel text-warning"></i>
+                                <i class="fa fa-times text-warning"></i>
                                 {% else %}
                                 <i class="fa fa-clock text-primary"></i>
                                 {% endif %}
@@ -88,9 +88,9 @@
             </div>
             <div class="card-body">
     <ul class="list-group p-4">
-        <h6><li > Candidate Degree : {{object.degree}}</li></h6>
-        <h6><li > Candidate Degree : {{object.experience}}</li></h6>
-        <h6><li > Candidate Degree : {{object.previous_company}}</li></h6><hr>
+        <h6><li > Candidate Degree     : {{object.degree}}</li></h6>
+        <h6><li > Candidate Experience : {{object.experience}}</li></h6>
+        <h6><li > Previous Company     : {{object.previous_company}}</li></h6><hr>
         <h6>{{object.about}}</h6>
         <a href="{{object.cv.url}}">Download Cv</a>
     </ul>

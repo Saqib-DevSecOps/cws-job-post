@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from src.portals.company.filters import JobFilter
 from src.portals.company.models import Job
@@ -35,6 +35,18 @@ class HomeView(ListView):
 
         context['object_list'] = page_object
         return context
+
+
+class AboutView(TemplateView):
+    template_name = 'website/about.html'
+
+
+class ContactView(TemplateView):
+    template_name = 'website/contact.html'
+
+
+class InternshipView(TemplateView):
+    template_name = 'website/internship.html'
 
 
 class ProjectView(DetailView):

@@ -21,7 +21,9 @@ if SERVER:
     SITE_ID = 2
     GOOGLE_CALLBACK_ADDRESS = "http://00.pythonanywhere.com/accounts/google/login/callback/"
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_REDIRECT_URL = '/accounts/cross-auth/'
 
 """ INSTALLATIONS ------------------------------------------------------------------------------------------------"""
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
 
     # REQUIRED_APPLICATIONS
     'crispy_forms',
+    "crispy_bootstrap5",
     'ckeditor',
 
     # AUTH_API
@@ -63,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 AUTHENTICATION_BACKENDS = (

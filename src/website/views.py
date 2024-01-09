@@ -37,18 +37,6 @@ class HomeView(ListView):
         return context
 
 
-class AboutView(TemplateView):
-    template_name = 'website/about.html'
-
-
-class ContactView(TemplateView):
-    template_name = 'website/contact.html'
-
-
-class InternshipView(TemplateView):
-    template_name = 'website/internship.html'
-
-
 class ProjectView(DetailView):
     template_name = 'website/project_detail.html'
     model = Job
